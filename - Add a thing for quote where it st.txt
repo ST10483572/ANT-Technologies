@@ -1,0 +1,2 @@
+- Add a thing for quote where it stores a customers course selection in an array with discounts applied
+-

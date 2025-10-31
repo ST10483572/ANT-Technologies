@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Empowering the Nation – Contact Us">
+    <meta name="description" content="Get in touch with Empowering the Nation for course inquiries in Johannesburg.">
+    <meta name="keywords" content="Contact us, course inquiries, Johannesburg, skills training">
+    <title>Contact - Empowering the Nation</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Empowering the Nation logo">
+            <span>Empowering the Nation</span>
+        </div>
+        <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="summarysixmonthcourse.html">📅 Six-month Courses</a>
+            <a href="sixweekcourses.html">⏱️ Six-week Courses</a>
+            <a href="quote.html">🧮 Calculate Fees</a>
+            <a href="contact.html" class="active">📞 Contact Details</a>
+            <a href="about.html">ℹ️ About</a>
+        </nav>
+        <select onchange="if(this.value) window.location.href=this.value;">
+            <option value="">Go to...</option>
+            <option value="index.html">Home</option>
+            <option value="summarysixmonthcourse.html">Summary of Six-month Courses</option>
+            <option value="sixweekcourses.html">Summary of Six-week Courses</option>
+            <option value="quote.html">Calculate Fees</option>
+            <option value="contact.html" selected>Contact Details</option>
+            <option value="about.html">About</option>
+        </select>
+    </header>
+    
+    <main>
+        <h1>Contact Details</h1>
+        <p>Get in touch with Empowering the Nation for course inquiries, enrollment information, or to book a consultation with one of our advisors.</p>
+        
+        <section>
+            <h2>📞 Get In Touch</h2>
+            <div style="display: grid; gap: 1.5rem; margin-bottom: 2rem;">
+                <div style="padding: 1.5rem; background: rgba(46, 125, 50, 0.05); border-radius: 12px; border-left: 4px solid var(--primary-color);">
+                    <h3>📱 Phone</h3>
+                    <p style="font-size: 1.2rem; font-weight: 600; color: var(--primary-color); margin: 0;">
+                        <a href="tel:0123456789" style="color: inherit; text-decoration: none;">012 345 6789</a>
+                    </p>
+                    <p style="color: var(--text-light); margin: 0.5rem 0 0 0;">Monday - Friday: 8:00 AM - 5:00 PM</p>
+                </div>
+                
+                <div style="padding: 1.5rem; background: rgba(255, 215, 0, 0.1); border-radius: 12px; border-left: 4px solid var(--secondary-color);">
+                    <h3>📧 Email</h3>
+                    <p style="font-size: 1.2rem; font-weight: 600; color: var(--primary-color); margin: 0;">
+                        <a href="mailto:info@empoweringthenation.co.za" style="color: inherit; text-decoration: none;">info@empoweringthenation.co.za</a>
+                    </p>
+                    <p style="color: var(--text-light); margin: 0.5rem 0 0 0;">We typically respond within 24 hours</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>💬 Send us a Message</h2>
+            <form id="contactForm" onsubmit="return submitContactForm();">
+                <fieldset>
+                    <legend>📋 Your Information</legend>
+                    
+                    <label for="contactName">Full Name *</label>
+                    <input type="text" id="contactName" name="name" placeholder="Enter your full name" required>
+                    <span class="error" id="nameError">Please enter your name</span>
+                    
+                    <label for="contactPhone">Phone Number *</label>
+                    <input type="tel" id="contactPhone" name="phone" placeholder="Enter your phone number" required>
+                    <span class="error" id="phoneError">Please enter a valid phone number</span>
+                    
+                    <label for="contactEmail">Email Address *</label>
+                    <input type="email" id="contactEmail" name="email" placeholder="Enter your email address" required>
+                    <span class="error" id="emailError">Please enter a valid email address</span>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>💭 Your Message</legend>
+                    
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject">
+                        <option value="">Select a topic...</option>
+                        <option value="course-inquiry">Course Inquiry</option>
+                        <option value="enrollment">Enrollment Information</option>
+                        <option value="pricing">Pricing & Discounts</option>
+                        <option value="schedule">Schedule Information</option>
+                        <option value="other">Other</option>
+                    </select>
+                    
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help you..." required style="resize: vertical; min-height: 120px;"></textarea>
+                    <span class="error" id="messageError">Please enter your message</span>
+                </fieldset>
+                
+                <button type="submit">📤 Send Message</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>📍 Our Training Venues in Johannesburg</h2>
+            <div style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="padding: 1.5rem; background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: var(--shadow-light);">
+                    <h3>🏢 Hillbrow Training Centre</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;">123 Twist Street, Hillbrow, Johannesburg, 2001</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Centrally located venue offering all six-month learnerships and six-week short courses. Accessible by public transport.</p>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.8!2d28.0506!3d-26.1849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSGlsbGJyb3csIEpvaGFubmVzYnVyZw!5e0!3m2!1sen!2sza!4v1234567890"
+                        width="100%" 
+                        height="200" 
+                        style="border:0; border-radius: 8px;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <div style="padding: 1.5rem; background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: var(--shadow-light);">
+                    <h3>🌿 Soweto Skills Hub</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;">45 Vilakazi Street, Orlando West, Soweto, 1804</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Community-focused venue specializing in practical skills training. Near the famous Nelson Mandela house.</p>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3585.0!2d27.9086!3d-26.2476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zU293ZXRvLCBKb2hhbm5lc2J1cmc!5e0!3m2!1sen!2sza!4v1234567890"
+                        width="100%" 
+                        height="200" 
+                        style="border:0; border-radius: 8px;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <div style="padding: 1.5rem; background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: var(--shadow-light);">
+                    <h3>🏙️ Sandton Learning Centre</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;">88 Rivonia Road, Sandton, 2196</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Modern facility in the business district, ideal for evening and weekend classes. Easy access from Gautrain station.</p>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3582.1!2d28.0574!3d-26.1065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zU2FuZHRvbiwgSm9oYW5uZXNidXJn!5e0!3m2!1sen!2sza!4v1234567890"
+                        width="100%" 
+                        height="200" 
+                        style="border:0; border-radius: 8px;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🕒 Business Hours</h2>
+            <div style="background: rgba(46, 125, 50, 0.05); padding: 1.5rem; border-radius: 12px;">
+                <div style="display: grid; gap: 0.5rem;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Monday - Thursday:</span>
+                        <span style="font-weight: 600;">8:00 AM - 5:00 PM</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Friday:</span>
+                        <span style="font-weight: 600;">8:00 AM - 4:00 PM</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Saturday:</span>
+                        <span style="font-weight: 600;">9:00 AM - 1:00 PM</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Sunday:</span>
+                        <span style="font-weight: 600; color: var(--text-light);">Closed</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        &copy; 2025 Empowering the Nation | Follow us:
+        <a href="#" aria-label="Facebook">Facebook</a> |
+        <a href="#" aria-label="Instagram">Instagram</a>
+    </footer>
+    
+    <script src="js/main.js"></script>
+    <script>
+        function submitContactForm() {
+            const form = document.getElementById('contactForm');
+            const formData = new FormData(form);
+            
+            // Basic validation
+            let isValid = true;
+            const requiredFields = ['name', 'phone', 'email', 'message'];
+            
+            requiredFields.forEach(field => {
+                const input = form.querySelector(`[name="${field}"]`);
+                const errorElement = document.getElementById(field + 'Error');
+                
+                if (!input.value.trim()) {
+                    if (errorElement) {
+                        errorElement.style.display = 'block';
+                        errorElement.textContent = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
+                    }
+                    isValid = false;
+                } else {
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Email validation
+            const email = form.querySelector('[name="email"]').value;
+            const emailError = document.getElementById('emailError');
+            if (email && !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                emailError.style.display = 'block';
+                emailError.textContent = 'Please enter a valid email address';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Show success message
+                showNotification('Thank you for your message! We will get back to you within 24 hours.', 'success');
+                form.reset();
+            } else {
+                showNotification('Please correct the errors in the form', 'error');
+            }
+            
+            return false;
+        }
+        
+        // Simple notification function
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4caf50' : '#f44336'};
+                color: white;
+                padding: 12px 24px;
+                border-radius: 8px;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+                z-index: 10000;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 4000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empowering the Nation - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Empowering the Nation logo">
+            <span>Empowering the Nation</span>
+        </div>
+        <nav>
+            <a href="index.html" class="active">🏠 Home</a>
+            <a href="summarysixmonthcourse.html">📅 Six-month Courses</a>
+            <a href="sixweekcourses.html">⏱️ Six-week Courses</a>
+            <a href="quote.html">🧮 Calculate Fees</a>
+            <a href="contact.html">📞 Contact Details</a>
+            <a href="about.html">ℹ️ About</a>
+        </nav>
+        <select onchange="if(this.value) window.location.href=this.value;">
+            <option value="">Go to...</option>
+            <option value="index.html" selected>Home</option>
+            <option value="summarysixmonthcourse.html">Summary of Six-month Courses</option>
+            <option value="sixweekcourses.html">Summary of Six-week Courses</option>
+            <option value="quote.html">Calculate Fees</option>
+            <option value="contact.html">Contact Details</option>
+            <option value="about.html">About</option>
+        </select>
+    </header>
+    <main>
+        <h1>Welcome to Empowering the Nation</h1>
+        <p>
+            Empowering the Nation was established in 2022 by <strong>Precious Radebe</strong> to provide skills training for domestic workers and gardeners in Johannesburg. Her parents and other elderly relatives were never given the chance to upskill themselves or follow a formal educational qualification, so this training school is her way of supporting similarly affected members from her community.
+        </p>
+        
+        <section>
+            <h2>🎯 Our Purpose</h2>
+            <p>We upskill domestic workers and gardeners by making them more marketable when seeking employment and enabling them to be paid at a higher rate because of these additional skills. They can also be entrepreneurs and set up their own small business utilizing these newly obtained skills.</p>
+            <p><strong class="highlight">Hundreds of domestic workers and gardeners have been trained on both six-month long Learnerships and six-week Short Skills Training Programmes!</strong></p>
+        </section>
+        
+        <section>
+            <h2>📚 Course Categories</h2>
+            <div style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
+                <div class="course">
+                    <h3>Six-Month Learnerships (R1,500 each)</h3>
+                    <p>Comprehensive 12-week training programs that provide in-depth knowledge and certification.</p>
+                    <ul style="list-style: disc; padding-left: 2rem;">
+                        <li>First Aid</li>
+                        <li>Sewing</li>
+                        <li>Landscaping</li>
+                        <li>Life Skills</li>
+                    </ul>
+                    <a class="course-link" href="summarysixmonthcourse.html">View Six-Month Courses →</a>
+                </div>
+                
+                <div class="course">
+                    <h3>Six-Week Short Skills Training (R750 each)</h3>
+                    <p>Focused, practical courses designed to quickly build essential skills in 6 weeks.</p>
+                    <ul style="list-style: disc; padding-left: 2rem;">
+                        <li>Child Minding</li>
+                        <li>Cooking</li>
+                        <li>Garden Maintenance</li>
+                    </ul>
+                    <a class="course-link" href="sixweekcourses.html">View Six-Week Courses →</a>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>💰 Discount Structure</h2>
+            <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                <div style="padding: 1rem; background: rgba(46, 125, 50, 0.05); border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                    <strong>One course:</strong> No discount
+                </div>
+                <div style="padding: 1rem; background: rgba(255, 215, 0, 0.1); border-radius: 8px; border-left: 4px solid var(--secondary-color);">
+                    <strong>Two courses:</strong> 5% discount
+                </div>
+                <div style="padding: 1rem; background: rgba(46, 125, 50, 0.1); border-radius: 8px; border-left: 4px solid var(--accent-color);">
+                    <strong>Three courses:</strong> 10% discount
+                </div>
+                <div style="padding: 1rem; background: rgba(46, 125, 50, 0.02); border-radius: 8px; border: 2px dashed var(--primary-color);">
+                    <strong>More than three courses:</strong> 15% discount
+                </div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 1rem;">
+                *VAT (15%) is added to the discounted total
+            </p>
+        </section>
+        
+        <section>
+            <h2>🚀 Get Started</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem;">
+                <a class="primary-btn" href="quote.html">🧮 Calculate Fees</a>
+                <a class="secondary-btn" href="contact.html">📞 Contact Us</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        &copy; 2025 Empowering the Nation | Follow us:
+        <a href="#" aria-label="Facebook">Facebook</a> |
+        <a href="#" aria-label="Instagram">Instagram</a>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

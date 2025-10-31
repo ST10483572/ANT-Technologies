@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sewing - Empowering the Nation</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Empowering the Nation logo">
+            <span>Empowering the Nation</span>
+        </div>
+        <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="summarysixmonthcourse.html">📅 Six-month Courses</a>
+            <a href="sixweekcourses.html">⏱️ Six-week Courses</a>
+            <a href="quote.html">🧮 Calculate Fees</a>
+            <a href="contact.html">📞 Contact</a>
+            <a href="about.html">ℹ️ About</a>
+        </nav>
+        <select onchange="if(this.value) window.location.href=this.value;" style="margin-top:1em;">
+            <option value="">Go to...</option>
+            <option value="index.html">Home</option>
+            <option value="summarysixmonthcourse.html">Six-month Courses</option>
+            <option value="sixweekcourses.html">Six-week Courses</option>
+            <option value="quote.html">Calculate Fees</option>
+            <option value="contact.html">Contact</option>
+            <option value="about.html">About</option>
+        </select>
+    </header>
+    <main>
+        <div class="text-center mb-2">
+            <img src="images/sewing.jpg" alt="Sewing Course" style="max-width: 400px;">
+        </div>
+        <h1>Sewing</h1>
+        <div class="course">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <span style="font-size: 1.2rem; font-weight: 600;">Six-Month Learnership</span>
+                <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">R1,500</span>
+            </div>
+            <h2>🎯 Purpose</h2>
+            <p>To provide alterations and new garment tailoring services.</p>
+            <h2>📚 Course Content</h2>
+            <div style="background: rgba(46, 125, 50, 0.05); padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(46, 125, 50, 0.1);">
+                        <strong>🪡 Types of stitches</strong>
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(46, 125, 50, 0.1);">
+                        <strong>🧵 Threading a sewing machine</strong>
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(46, 125, 50, 0.1);">
+                        <strong>🔘 Sewing buttons, zips, hems and seams</strong>
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(46, 125, 50, 0.1);">
+                        <strong>✂️ Alterations</strong>
+                    </li>
+                    <li style="padding: 0.5rem 0;">
+                        <strong>👗 Designing and sewing new garments</strong>
+                    </li>
+                </ul>
+            </div>
+            <h2>⏱️ Course Duration</h2>
+            <p>This comprehensive course runs for <strong>six months</strong>.</p>
+            <h2>🎓 What You'll Gain</h2>
+            <div style="display: grid; gap: 1rem; margin: 1.5rem 0;">
+                <div style="padding: 1rem; background: rgba(255,255,255,0.8); border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                    <strong>Certification:</strong> Sewing certificate upon completion
+                </div>
+                <div style="padding: 1rem; background: rgba(255,255,255,0.8); border-radius: 8px; border-left: 4px solid var(--secondary-color);">
+                    <strong>Employment Value:</strong> Skill for tailors and domestic workers
+                </div>
+                <div style="padding: 1rem; background: rgba(255,255,255,0.8); border-radius: 8px; border-left: 4px solid var(--accent-color);">
+                    <strong>Life Skills:</strong> Ability to alter and create garments
+                </div>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+                <a href="quote.html" class="primary-btn">🧮 Get Quote for This Course</a>
+                <a href="summarysixmonthcourse.html" class="secondary-btn">← Back to Six-Month Courses</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

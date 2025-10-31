@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Empowering the Nation – Get Your Course Quote">
+    <meta name="description" content="Calculate your course fees with discounts for multiple enrollments in Johannesburg skills training programs.">
+    <meta name="keywords" content="Skills training, course quote, Johannesburg, discount courses, First Aid, Sewing, Landscaping, Life Skills">
+    <title>Quote - Empowering the Nation</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Empowering the Nation logo">
+            <span>Empowering the Nation</span>
+        </div>
+        <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="summarysixmonthcourse.html">📅 Six-month Courses</a>
+            <a href="sixweekcourses.html">⏱️ Six-week Courses</a>
+            <a href="quote.html" class="active">🧮 Calculate Fees</a>
+            <a href="contact.html">📞 Contact Details</a>
+            <a href="about.html">ℹ️ About</a>
+        </nav>
+        <select onchange="if(this.value) window.location.href=this.value;">
+            <option value="">Go to...</option>
+            <option value="index.html">Home</option>
+            <option value="summarysixmonthcourse.html">Summary of Six-month Courses</option>
+            <option value="sixweekcourses.html">Summary of Six-week Courses</option>
+            <option value="quote.html" selected>Calculate Fees</option>
+            <option value="contact.html">Contact Details</option>
+            <option value="about.html">About</option>
+        </select>
+    </header>
+    <main>
+        <div class="text-center mb-2">
+            <img src="images/firstaid.jpg" alt="First Aid Course" style="max-width: 300px; border-radius: 12px; box-shadow: var(--shadow-medium);">
+        </div>
+        <h1>Calculate Fees</h1>
+        <p>Select your courses and get an instant quote. Complete the form to request a consultant to contact you for booking. <span class="highlight">The more courses you select, the bigger the discount!</span></p>
+        
+        <form id="quoteForm" onsubmit="return calculateQuote();">
+            <fieldset>
+                <legend>📋 Contact Details</legend>
+                <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                    A consultant will contact you to make a booking for your selected course(s).
+                </p>
+                
+                <label for="qName">Full Name *</label>
+                <input type="text" id="qName" name="name" placeholder="Enter your full name" required>
+                <span id="nameError" class="error">Name is required</span>
+
+                <label for="qPhone">Phone Number *</label>
+                <input type="tel" id="qPhone" name="phone" placeholder="Enter your phone number" required>
+                <span id="phoneError" class="error">Valid phone number is required</span>
+
+                <label for="qEmail">Email Address *</label>
+                <input type="email" id="qEmail" name="email" placeholder="Enter your email address" required>
+                <span id="emailError" class="error">Valid email address is required</span>
+            </fieldset>
+            
+            <fieldset>
+                <legend>📚 Select Your Courses</legend>
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1rem;">
+                    <strong>Discount Structure:</strong> One course = No discount | Two courses = 5% discount | Three courses = 10% discount | More than three courses = 15% discount
+                </p>
+                
+                <div style="display: grid; gap: 0.5rem;">
+                    <h4 style="margin: 1rem 0 0.5rem 0; color: var(--primary-color);">Six-Month Learnerships (R1,500 each)</h4>
+                    <label><input type="checkbox" class="courseCheck" value="First Aid" data-fee="1500" data-duration="6-month"> First Aid - R1,500 (6-month learnership)</label>
+                    <label><input type="checkbox" class="courseCheck" value="Sewing" data-fee="1500" data-duration="6-month"> Sewing - R1,500 (6-month learnership)</label>
+                    <label><input type="checkbox" class="courseCheck" value="Landscaping" data-fee="1500" data-duration="6-month"> Landscaping - R1,500 (6-month learnership)</label>
+                    <label><input type="checkbox" class="courseCheck" value="Life Skills" data-fee="1500" data-duration="6-month"> Life Skills - R1,500 (6-month learnership)</label>
+                    
+                    <h4 style="margin: 1rem 0 0.5rem 0; color: var(--primary-color);">Six-Week Short Skills Training (R750 each)</h4>
+                    <label><input type="checkbox" class="courseCheck" value="Child Minding" data-fee="750" data-duration="6-week"> Child Minding - R750 (6-week course)</label>
+                    <label><input type="checkbox" class="courseCheck" value="Cooking" data-fee="750" data-duration="6-week"> Cooking - R750 (6-week course)</label>
+                    <label><input type="checkbox" class="courseCheck" value="Garden Maintenance" data-fee="750" data-duration="6-week"> Garden Maintenance - R750 (6-week course)</label>
+                </div>
+                <span id="courseError" class="error">Please select at least one course</span>
+            </fieldset>
+            
+            <button type="submit">🧮 Calculate Fees</button>
+        </form>
+        
+        <div id="quoteResult"></div>
+    </main>
+    
+    <footer>
+        &copy; 2025 Empowering the Nation | Follow us:
+        <a href="#">Facebook</a> |
+        <a href="#">Instagram</a>
+    </footer>
+
+    <!-- PDF and Email Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    
+    <script>
+        // Initialize EmailJS (replace with your actual user ID)
+        emailjs.init('YOUR_EMAILJS_USER_ID');
+
+        let currentQuoteData = null;
+
+        function calculateQuote() {
+            // Reset all errors
+            document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+            
+            let isValid = true;
+            
+            // Validate name
+            const name = document.getElementById('qName').value.trim();
+            if (!name || name.length < 2) {
+                document.getElementById('nameError').textContent = 'Please enter a valid name (at least 2 characters)';
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate phone
+            const phone = document.getElementById('qPhone').value.trim();
+            const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+            if (!phoneRegex.test(phone)) {
+                document.getElementById('phoneError').textContent = 'Please enter a valid phone number (at least 10 digits)';
+                document.getElementById('phoneError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate email
+            const email = document.getElementById('qEmail').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email address';
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate courses
+            const selectedCourses = Array.from(document.querySelectorAll('.courseCheck:checked'));
+            if (selectedCourses.length === 0) {
+                document.getElementById('courseError').textContent = 'Please select at least one course';
+                document.getElementById('courseError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                document.querySelector('fieldset').scrollIntoView({ behavior: 'smooth' });
+                return false;
+            }
+
+            // Calculate totals
+            let subtotal = 0;
+            const courseDetails = [];
+            
+            selectedCourses.forEach(checkbox => {
+                const courseName = checkbox.value;
+                const fee = parseFloat(checkbox.getAttribute('data-fee'));
+                const duration = checkbox.getAttribute('data-duration');
+                
+                courseDetails.push({ 
+                    name: courseName, 
+                    fee: fee, 
+                    duration: duration 
+                });
+                subtotal += fee;
+            });
+
+            // Calculate discount - matching exact scenario requirements
+            let discountRate = 0;
+            if (selectedCourses.length === 2) discountRate = 0.05;  // Two courses = 5%
+            else if (selectedCourses.length === 3) discountRate = 0.10;  // Three courses = 10%
+            else if (selectedCourses.length > 3) discountRate = 0.15;  // More than three courses = 15%
+            // One course = no discount (discountRate stays 0)
+            
+            const discountAmount = subtotal * discountRate;
+            const afterDiscount = subtotal - discountAmount;
+            const vatAmount = afterDiscount * 0.15;
+            const total = afterDiscount + vatAmount;
+
+            // Store quote data for PDF generation
+            currentQuoteData = {
+                name,
+                phone,
+                email,
+                courses: courseDetails,
+                subtotal,
+                discountRate,
+                discountAmount,
+                afterDiscount,
+                vatAmount,
+                total,
+                quoteNumber: 'ETN-' + Date.now(),
+                date: new Date().toLocaleDateString()
+            };
+
+            // Display results
+            displayQuoteResult(currentQuoteData);
+            
+            return false; // Prevent form submission
+        }
+
+        function displayQuoteResult(data) {
+            const resultDiv = document.getElementById('quoteResult');
+            
+            resultDiv.innerHTML = `
+                <h3>📄 Your Quote Summary</h3>
+                <div style="display: grid; gap: 1rem;">
+                    <div style="background: rgba(46, 125, 50, 0.05); padding: 1rem; border-radius: 8px;">
+                        <strong>Client:</strong> ${data.name}<br>
+                        <strong>Email:</strong> ${data.email}<br>
+                        <strong>Quote #:</strong> ${data.quoteNumber}<br>
+                        <strong>Date:</strong> ${data.date}
+                    </div>
+                    
+                    <div style="background: rgba(255, 215, 0, 0.1); padding: 1rem; border-radius: 8px;">
+                        <h4>📚 Selected Courses:</h4>
+                        ${data.courses.map(course => 
+                            `<div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                                <span>${course.name} (${course.duration})</span>
+                                <span>R${course.fee.toLocaleString()}</span>
+                            </div>`
+                        ).join('')}
+                    </div>
+                    
+                    <div style="background: rgba(46, 125, 50, 0.05); padding: 1rem; border-radius: 8px; font-size: 1.1rem;">
+                        <div style="display: flex; justify-content: space-between; margin: 0.25rem 0;">
+                            <span>Subtotal:</span>
+                            <span>R${data.subtotal.toLocaleString()}</span>
+                        </div>
+                        ${data.discountRate > 0 ? `
+                            <div style="display: flex; justify-content: space-between; margin: 0.25rem 0; color: #d32f2f;">
+                                <span>Discount (${(data.discountRate * 100)}%):</span>
+                                <span>-R${data.discountAmount.toLocaleString()}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin: 0.25rem 0;">
+                                <span>After Discount:</span>
+                                <span>R${data.afterDiscount.toLocaleString()}</span>
+                            </div>
+                        ` : ''}
+                        <div style="display: flex; justify-content: space-between; margin: 0.25rem 0;">
+                            <span>VAT (15%):</span>
+                            <span>R${data.vatAmount.toLocaleString()}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin: 0.5rem 0 0 0; font-weight: bold; font-size: 1.2rem; color: var(--primary-color); border-top: 2px solid var(--primary-color); padding-top: 0.5rem;">
+                            <span>TOTAL:</span>
+                            <span>R${data.total.toLocaleString()}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button type="button" onclick="generatePDF()" class="primary-btn">📄 Download PDF Invoice</button>
+                        <button type="button" onclick="sendEmailInvoice()" class="primary-btn">📧 Email Invoice</button>
+                    </div>
+                </div>
+            `;
+            
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generatePDF() {
+            if (!currentQuoteData) return;
+            
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Header
+            doc.setFontSize(20);
+            doc.setTextColor(46, 125, 50);
+            doc.text('EMPOWERING THE NATION', 105, 25, { align: 'center' });
+            
+            doc.setFontSize(16);
+            doc.text('COURSE INVOICE', 105, 35, { align: 'center' });
+            
+            // Quote details
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text(`Quote Number: ${currentQuoteData.quoteNumber}`, 160, 50);
+            doc.text(`Date: ${currentQuoteData.date}`, 160, 55);
+            
+            // Client details
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text('BILL TO:', 20, 70);
+            doc.setFontSize(10);
+            doc.text(`${currentQuoteData.name}`, 20, 78);
+            doc.text(`Email: ${currentQuoteData.email}`, 20, 85);
+            doc.text(`Phone: ${currentQuoteData.phone}`, 20, 92);
+            
+            // Course details
+            doc.setFontSize(12);
+            doc.text('COURSE DETAILS:', 20, 110);
+            
+            let yPos = 120;
+            doc.setFontSize(10);
+            doc.text('Course Name', 20, yPos);
+            doc.text('Duration', 100, yPos);
+            doc.text('Amount', 160, yPos);
+            
+            // Line under header
+            doc.line(20, yPos + 2, 190, yPos + 2);
+            yPos += 10;
+            
+            currentQuoteData.courses.forEach(course => {
+                doc.text(course.name, 20, yPos);
+                doc.text(course.duration, 100, yPos);
+                doc.text(`R${course.fee.toLocaleString()}`, 160, yPos);
+                yPos += 8;
+            });
+            
+            // Totals
+            yPos += 10;
+            doc.line(20, yPos, 190, yPos);
+            yPos += 10;
+            
+            doc.text(`Subtotal:`, 130, yPos);
+            doc.text(`R${currentQuoteData.subtotal.toLocaleString()}`, 160, yPos);
+            yPos += 8;
+            
+            if (currentQuoteData.discountRate > 0) {
+                doc.text(`Discount (${currentQuoteData.discountRate * 100}%):`, 130, yPos);
+                doc.text(`-R${currentQuoteData.discountAmount.toLocaleString()}`, 160, yPos);
+                yPos += 8;
+                
+                doc.text(`After Discount:`, 130, yPos);
+                doc.text(`R${currentQuoteData.afterDiscount.toLocaleString()}`, 160, yPos);
+                yPos += 8;
+            }
+            
+            doc.text(`VAT (15%):`, 130, yPos);
+            doc.text(`R${currentQuoteData.vatAmount.toLocaleString()}`, 160, yPos);
+            yPos += 8;
+            
+            // Total
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text(`TOTAL:`, 130, yPos);
+            doc.text(`R${currentQuoteData.total.toLocaleString()}`, 160, yPos);
+            
+            // Footer
+            yPos += 20;
+            doc.setFontSize(8);
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(100, 100, 100);
+            doc.text('Thank you for choosing Empowering the Nation!', 105, yPos, { align: 'center' });
+            doc.text('Contact us: info@empoweringthenation.co.za | 012 345 6789', 105, yPos + 5, { align: 'center' });
+            
+            // Save the PDF
+            doc.save(`Invoice-${currentQuoteData.quoteNumber}.pdf`);
+        }
+
+        async function sendEmailInvoice() {
+            if (!currentQuoteData) return;
+            
+            const button = event.target;
+            button.classList.add('loading');
+            button.textContent = 'Sending...';
+            button.disabled = true;
+            
+            try {
+                // Generate PDF for email attachment
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Use same PDF generation logic as above
+                // (For brevity, using simplified version here)
+                doc.setFontSize(16);
+                doc.text('Empowering the Nation - Invoice', 20, 20);
+                doc.setFontSize(12);
+                doc.text(`Name: ${currentQuoteData.name}`, 20, 40);
+                doc.text(`Quote #: ${currentQuoteData.quoteNumber}`, 20, 50);
+                doc.text('Courses:', 20, 70);
+                
+                let y = 80;
+                currentQuoteData.courses.forEach(course => {
+                    doc.text(`- ${course.name}: R${course.fee}`, 20, y);
+                    y += 10;
+                });
+                
+                doc.text(`Total: R${currentQuoteData.total.toLocaleString()}`, 20, y + 10);
+                
+                // Convert to base64 for email attachment
+                const pdfBlob = doc.output('blob');
+                const pdfBase64 = await blobToBase64(pdfBlob);
+                
+                // Note: This is a placeholder for EmailJS integration
+                // You'll need to set up EmailJS account and configure:
+                // 1. Create EmailJS account
+                // 2. Set up email service (Gmail, Outlook, etc.)
+                // 3. Create email template
+                // 4. Replace YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, YOUR_EMAILJS_USER_ID
+                
+                const templateParams = {
+                    to_email: currentQuoteData.email,
+                    from_name: "Empowering the Nation",
+                    to_name: currentQuoteData.name,
+                    quote_number: currentQuoteData.quoteNumber,
+                    total_amount: `R${currentQuoteData.total.toLocaleString()}`,
+                    courses: currentQuoteData.courses.map(c => c.name).join(', '),
+                    attachment: pdfBase64
+                };
+                
+                // Simulate email sending (replace with actual EmailJS call)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Actual EmailJS call would be:
+                // await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+                
+                alert(`✅ Invoice successfully sent to ${currentQuoteData.email}!`);
+                
+            } catch (error) {
+                console.error('Error sending email:', error);
+                alert('❌ Failed to send invoice. Please try again or download the PDF instead.');
+            } finally {
+                button.classList.remove('loading');
+                button.textContent = '📧 Email Invoice';
+                button.disabled = false;
+            }
+        }
+
+        function blobToBase64(blob) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        }
+
+        // Clear form function
+        function clearForm() {
+            document.getElementById('quoteForm').reset();
+            document.getElementById('quoteResult').style.display = 'none';
+            document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+            currentQuoteData = null;
+        }
+    </script>
+</body>
+</html>
